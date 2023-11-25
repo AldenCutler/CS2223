@@ -146,14 +146,14 @@ public class MostPreciousPath {
         int[][] path = mostPreciousPath(grid);
         int gems = getGemsFromPath(grid, path);
 
-        System.out.println("Bilbo's starting square is: " + "Row 1" + ", " + "Column " + (path[0][1]+1));
+        System.out.println("\nBilbo's starting square is: Row 1, Column " + (path[0][1]+1));
 
-        System.out.println("Bilbo collected " + gems + " gems.");
+        System.out.println("Bilbo collected " + gems + " gems.\n");
 
-        System.out.println("Bilbo's path is: ");
+        System.out.println("Bilbo's path is: \n");
         printPath(path, grid);
 
-        System.out.println("\nThe Arkenstone is in vault " + (path[path.length-1][1]+1) + ".");
+        System.out.println("\nThe Arkenstone is in vault " + (path[path.length-1][1]+1) + ".\n");
 
     }
 }
