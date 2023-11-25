@@ -94,8 +94,8 @@ public class MostPreciousPath {
      */
     static int getGemsFromPath(int[][] grid, int[][] path) {
         int gems = 0;
-        for (int[] ints : path) {
-            gems += grid[ints[0]][ints[1]];
+        for (int[] square : path) {
+            gems += grid[square[0]][square[1]];
         }
         return gems;
     }
