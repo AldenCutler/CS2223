@@ -1,65 +1,34 @@
 public class GaussJordanElimination {
-
+    
+    
     /*
-    *
-    * ALGORITHM: ForwardElimination(A[1..n, 1..n], b[1..n])
-    * // Applies Gaussian elimination to matrix A of a system's coefficients,
-    * // augmented with vector b of the system's right hand side values.
-    * // Input: Matrix A[1..n, 1..n] and the column-vector b[1..n].
-    * // Output: An equivalent upper-triangular matrix in place of A with the
-    * // corresponding right hand side values in the (n+1)st column
-    for i = 1 to n do A[i, n + 1] = b[i] // augments the matrix
-    for i = 1 to n - 1 do
-    for j = i + 1 to n do
-    for k = i + 1 to n + 1 do
-    A[j, k] = A[j, k] - A[i, k] * (A[j, i] / A[i, i])
-    *
-    * 1. Explain why the (repared)ForwardElimination algorithm on page 210 of Levitin fails to provide a solution for:
-    * x1 + x2 + x3 = 6
-    * x1 + x2 + 2x3 = 9
-    * x1 + 2x2 + 3x3 = 14
+    1. Explain why the (repared)ForwardElimination algorithm on page 210 of Levitin fails to provide a solution for:
+    x1 + x2 + x3 = 6
+    x1 + x2 + 2x3 = 9
+    x1 + 2x2 + 3x3 = 14
 
-    * --> This algorithm fails for this system of equations because after the first iteration, A[i,i] = 0, which
+    * This algorithm fails for this system of equations because after the first iteration, A[i,i] = 0, which
     * causes a division by zero error.
 
 
-    * ALGORITHM: betterForwardElimination(A[1..n, 1..n], b[1..n])
-    * // Implements Gaussian Elimination with partial pivoting.
-    * // Input: Matrix A[1..n, 1..n] and the column-vector b[1..n].
-    * // Output: An equivalent upper-triangular matrix in place of A with the
-    * // corresponding right hand side values in the (n+1)st column
-    for i = 1 to n do A[i, n + 1] = b[i] // augments the matrix
-    for i = 1 to n - 1 do
-        pivotrow = i
-        for j = i + 1 to n do
-            if |A[j, i]| > |A[pivotrow, i]| then pivotrow = j
-        for k = i to n + 1 do
-            swap A[i, k] and A[pivotrow, k]
-        for j = i + 1 to n do
-            temp = A[j, i] / A[i, i]
-            for k = i to n + 1 do
-                A[j, k] = A[j, k] - A[i, k] * temp
-
-    * 1b. How does the betterForwardElimination algorithm on page 211 fix this?
-    *
-    * --> This algorithm fixes the problem by swapping the rows of the matrix so that the pivot element is not zero,
+    1b. How does the betterForwardElimination algorithm on page 211 fix this?
+    
+    * This algorithm fixes the problem by swapping the rows of the matrix so that the pivot element is not zero,
     * therefore avoiding the division by zero error. This assumes that the system has a unique solution, since such 
     * a row must exist if this is the case.
-    * */
 
 
-    /*
-    * 2. Explain why the betterForwardElimination algorithm on page 211 of Levitin fails tp provide a solution for:
-    * x1 + x2 + x3 = 6
-    * x1 + x2 + 2x3 = 9
-    * 2x1 + 2x2 + 3x3 = 15
-    *
-    * --> betterForwardElimination fails on this system because this algorithm assumes that there is
+    2. Explain why the betterForwardElimination algorithm on page 211 of Levitin fails tp provide a solution for:
+    x1 + x2 + x3 = 6
+    x1 + x2 + 2x3 = 9
+    2x1 + 2x2 + 3x3 = 15
+    
+    * betterForwardElimination fails on this system because the algorithm assumes that there is
     * a single unique solution to the system. However, this in not the case for this system since
     * the third equation is a linear combination of the first two equations. There are an infinite 
     * number of solutions to this system, so the algorithm will not necessarily be able to find a row
-    * to swap with the current row that will not result in a division by zero error.
-    * */
+    * to swap with the current row that will not result in a division by zero error. 
+    */
 
 
      /**
@@ -88,7 +57,8 @@ public class GaussJordanElimination {
             if (matrix[i][i] == 0) {
                 int pivotRow = 1;
 
-                // find a row to swap with (such a row must exist if the system has a unique solution)
+                // find a row to swap with 
+                // (such a row must exist if the system has a unique solution, which is assumed)
                 while ((i + pivotRow) < n && matrix[i + pivotRow][i] == 0) {
                     pivotRow++;
                 }
@@ -101,11 +71,10 @@ public class GaussJordanElimination {
                 }
             }
 
-            // convert matrix to RREF
+            // j is the column index, so this zeroing out process is done for each column
+            // looping over every i, this converts the entire matrix to reduced row echelon form
             for (int j = 0; j < n; j++) {
-                // excluding all i == j, so don't zero-out the pivot element
                 if (i != j) {
-                    // zero-out the element at row j, column i
                     double temp = matrix[j][i] / matrix[i][i];
                     for (int k = 0; k <= n; k++) {
                         matrix[j][k] = matrix[j][k] - (matrix[i][k]) * temp;

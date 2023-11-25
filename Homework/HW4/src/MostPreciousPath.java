@@ -15,7 +15,8 @@ public class MostPreciousPath {
         int[][] path = new int[grid.length][2]; // to store the i, j coordinates of the path
         int n = grid.length;
 
-        // base case, the most precious path in the bottom row is just the square with the most gems
+        // for the bottom row: 
+        // the most precious path in the bottom row is just the square with the most gems
         int max = 0;
         int maxIndex = 0;
         for (int i = 0; i < n; i++) {
@@ -32,59 +33,57 @@ public class MostPreciousPath {
             int prevRow = path[i-1][0];
             int prevCol = path[i-1][1];
 
-            // if our previous square was in the leftmost column, we can only move up-right or up
-            // so we need to check which of those two squares has the most gems
-            if (prevCol == 0) {
-                // up-right
-                if (grid[prevRow - 1][prevCol] > grid[prevRow - 1][prevCol + 1]) {
-                    path[i][0] = prevRow - 1;
-                    path[i][1] = prevCol;
-                }
-                // up
-                else {
-                    path[i][0] = prevRow - 1;
-                    path[i][1] = prevCol + 1;
-                }
-            }
+            switch(prevCol) {
 
-            // if our previous square was in the rightmost column, we can only move up-left or up
-            else if (prevCol == n-1) {
-                // up-left
-                if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol-1]) {
-                    path[i][0] = prevRow-1;
-                    path[i][1] = prevCol;
-                }
-                // up
-                else {
-                    path[i][0] = prevRow-1;
-                    path[i][1] = prevCol-1;
-                }
-            }
+                // if our previous square was in the leftmost column, we can only move up-right or up
+                // so we need to check which of those two squares has the most gems
+                case 0:
+                    if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol+1]) {
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol;
+                    }
+                    else {
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol+1;
+                    }
+                    break;
 
-            // otherwise, we can move up-left, up-right, or up
-            else {
-                // up-left
-                if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol-1]
-                        && grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol+1]) {
-                    path[i][0] = prevRow-1;
-                    path[i][1] = prevCol;
-                }
-                // up-right
-                else if (grid[prevRow-1][prevCol-1] > grid[prevRow-1][prevCol]
-                        && grid[prevRow-1][prevCol-1] > grid[prevRow-1][prevCol+1]) {
-                    path[i][0] = prevRow-1;
-                    path[i][1] = prevCol-1;
-                }
-                // up
-                else {
-                    path[i][0] = prevRow-1;
-                    path[i][1] = prevCol+1;
-                }
+                // if our previous square was in the rightmost column, we can only move up-left or up
+                // 7 is the index of the rightmost column. I tried to use grid.length-1, but I was getting an error saying that case expressions must be constant expressions
+                case 7:     
+                    if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol-1]) {
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol;
+                    }
+                    else {
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol-1;
+                    }
+                    break;
+
+                // otherwise, we can move up-left, up-right, or up
+                default:
+                    if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol-1]
+                            && grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol+1]) {     // if up is the most precious square
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol;
+                    }
+                    else if (grid[prevRow-1][prevCol-1] > grid[prevRow-1][prevCol]
+                            && grid[prevRow-1][prevCol-1] > grid[prevRow-1][prevCol+1]) {   // if up-left is the most precious square
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol-1;
+                    }
+                    else {                                                                  // if up-right is the most precious square
+                        path[i][0] = prevRow-1;
+                        path[i][1] = prevCol+1;
+                    }
+                    break;
             }
         }
 
         return path;
     }
+
 
     /**
      * Returns the number of gems collected from a path
@@ -99,6 +98,7 @@ public class MostPreciousPath {
         }
         return gems;
     }
+
 
     /**
      * Prints the path to the console
