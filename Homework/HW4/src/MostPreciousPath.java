@@ -33,51 +33,47 @@ public class MostPreciousPath {
             int prevRow = path[i-1][0];
             int prevCol = path[i-1][1];
 
-            switch(prevCol) {
+            switch (prevCol) {
 
                 // if our previous square was in the leftmost column, we can only move up-right or up
                 // so we need to check which of those two squares has the most gems
-                case 0:
-                    if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol+1]) {
-                        path[i][0] = prevRow-1;
+                case 0 -> {
+                    if (grid[prevRow - 1][prevCol] > grid[prevRow - 1][prevCol + 1]) {
+                        path[i][0] = prevRow - 1;
                         path[i][1] = prevCol;
+                    } else {
+                        path[i][0] = prevRow - 1;
+                        path[i][1] = prevCol + 1;
                     }
-                    else {
-                        path[i][0] = prevRow-1;
-                        path[i][1] = prevCol+1;
-                    }
-                    break;
+                }
 
                 // if our previous square was in the rightmost column, we can only move up-left or up
                 // 7 is the index of the rightmost column. I tried to use grid.length-1, but I was getting an error saying that case expressions must be constant expressions
-                case 7:     
-                    if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol-1]) {
-                        path[i][0] = prevRow-1;
+                case 7 -> {
+                    if (grid[prevRow - 1][prevCol] > grid[prevRow - 1][prevCol - 1]) {
+                        path[i][0] = prevRow - 1;
                         path[i][1] = prevCol;
+                    } else {
+                        path[i][0] = prevRow - 1;
+                        path[i][1] = prevCol - 1;
                     }
-                    else {
-                        path[i][0] = prevRow-1;
-                        path[i][1] = prevCol-1;
-                    }
-                    break;
+                }
 
                 // otherwise, we can move up-left, up-right, or up
-                default:
-                    if (grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol-1]
-                            && grid[prevRow-1][prevCol] > grid[prevRow-1][prevCol+1]) {     // if up is the most precious square
-                        path[i][0] = prevRow-1;
+                default -> {
+                    if (grid[prevRow - 1][prevCol] > grid[prevRow - 1][prevCol - 1]
+                            && grid[prevRow - 1][prevCol] > grid[prevRow - 1][prevCol + 1]) {     // if up is the most precious square
+                        path[i][0] = prevRow - 1;
                         path[i][1] = prevCol;
+                    } else if (grid[prevRow - 1][prevCol - 1] > grid[prevRow - 1][prevCol]
+                            && grid[prevRow - 1][prevCol - 1] > grid[prevRow - 1][prevCol + 1]) {   // if up-left is the most precious square
+                        path[i][0] = prevRow - 1;
+                        path[i][1] = prevCol - 1;
+                    } else {                                                                  // if up-right is the most precious square
+                        path[i][0] = prevRow - 1;
+                        path[i][1] = prevCol + 1;
                     }
-                    else if (grid[prevRow-1][prevCol-1] > grid[prevRow-1][prevCol]
-                            && grid[prevRow-1][prevCol-1] > grid[prevRow-1][prevCol+1]) {   // if up-left is the most precious square
-                        path[i][0] = prevRow-1;
-                        path[i][1] = prevCol-1;
-                    }
-                    else {                                                                  // if up-right is the most precious square
-                        path[i][0] = prevRow-1;
-                        path[i][1] = prevCol+1;
-                    }
-                    break;
+                }
             }
         }
 
