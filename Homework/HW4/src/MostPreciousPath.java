@@ -2,6 +2,24 @@ public class MostPreciousPath {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String GREEN_BOLD = "\033[1;32m";
 
+    static int[][] mostPreciousPath(int[][] grid) {
+        int n = grid.length;
+        int[][] path = new int[n][2]; // to store the i, j coordinates of the path
+        int gems = 0;
+
+        // for every square in the bottom row, find the most precious path that starts at that square
+        for (int i = 0; i < n; i++) {
+            int[][] tempPath = mostPreciousPathHelper(grid, i);
+            int tempGems = getGemsFromPath(grid, tempPath);
+            if (tempGems > gems) {
+                gems = tempGems;
+                path = tempPath;
+            }
+        }
+
+        return path;
+    }
+
 
     /**
      * Given an n x n grid of squares, each containing a number of gems,
@@ -10,23 +28,14 @@ public class MostPreciousPath {
      * @param grid a 2D array of integers representing the number of gems in each square
      * @return an array of integers representing the path of the most precious path
      */
-    static int[][] mostPreciousPath(int[][] grid) {
+    static int[][] mostPreciousPathHelper(int[][] grid, int startCol) {
 
         int[][] path = new int[grid.length][2]; // to store the i, j coordinates of the path
         int n = grid.length;
 
-        // for the bottom row: 
-        // the most precious path in the bottom row is just the square with the most gems
-        int max = 0;
-        int maxIndex = 0;
-        for (int i = 0; i < n; i++) {
-            if (grid[n-1][i] > max) {
-                max = grid[n-1][i];
-                maxIndex = i;
-            }
-        }
+        // initialize the path to start at the bottom row
         path[0][0] = n-1;
-        path[0][1] = maxIndex;
+        path[0][1] = startCol;
 
         // find most precious square in the row above the previous square
         for (int i = 1; i < n; i++) {
@@ -125,8 +134,9 @@ public class MostPreciousPath {
     }
 
 
-
     public static void main(String[] args) {
+
+        System.out.println("\nTo see the color-coded path, please run this program in a terminal that supports ANSI escape codes, such in IntelliJ or from the console (if you run it using the VSCode Java extension it won't work).");
 
         int[][] grid = {
                 {35, 89, 52, 66, 82, 20, 95, 21},
@@ -139,17 +149,18 @@ public class MostPreciousPath {
                 {96, 33, 44, 98, 75, 68, 99, 84},
         };
 
-        int[][] path = mostPreciousPath(grid);
-        int gems = getGemsFromPath(grid, path);
+        int[][] bestPath = mostPreciousPath(grid);
+        int maxGems = getGemsFromPath(grid, bestPath);
 
-        System.out.println("\nBilbo's starting square is: Row 1, Column " + (path[0][1]+1));
 
-        System.out.println("Bilbo collected " + gems + " gems.\n");
+        System.out.println("\nBilbo's starting square is: Row 1, Column " + (bestPath[0][1]+1));
+
+        System.out.println("Bilbo collected " + maxGems + " gems.\n");
 
         System.out.println("Bilbo's path is: \n");
-        printPath(path, grid);
+        printPath(bestPath, grid);
 
-        System.out.println("\nThe Arkenstone is in vault " + (path[path.length-1][1]+1) + ".\n");
+        System.out.println("\nThe Arkenstone is in vault " + (bestPath[bestPath.length-1][1]+1) + ".\n");
 
     }
 }
