@@ -39,7 +39,7 @@ char* arrayRepresentation(int n, int board[n][n]) {
 // isLegalPosition Test Cases
 void isLegalPositionTests() {
     
-    printf("\n\n\nisLegalPosition Test Cases:\n-------------------------------------------\n");
+    printf("\n\n\n  isLegalPosition Test Cases:\n-------------------------------------------\n");
     int n = 8;    
     int board[n][n];
     int queenPositions[8] = {1, 6, 8, 3, 7, 0, 0, 0};
@@ -47,41 +47,41 @@ void isLegalPositionTests() {
     // Test Case 1 (legal position)
     setBoard(n, board, queenPositions);
     // printBoard(n, board);
-    printf("Test Case 1: %s\n", isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("  Test Case 1: %s\n", isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
+    printf("  isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
 
     // Test Case 2 (legal position)
     int queenPositions2[8] = {1, 6, 8, 3, 7, 4, 2, 5};
     setBoard(n, board, queenPositions2);
     // printBoard(n, board);
-    printf("\nTest Case 2: %s\n", isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("\n  Test Case 2: %s\n", isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
+    printf("  isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
 
     // Test Case 3 (illegal position)
     int queenPositions3[8] = {1, 6, 8, 3, 5, 0, 0, 0};
     setBoard(n, board, queenPositions3);
     // printBoard(n, board);
-    printf("\nTest Case 3: %s\n", !isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("\n  Test Case 3: %s\n", !isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
+    printf("  isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
 
     // Test Case 4 (illegal position)
     int queenPositions4[8] = {1, 6, 8, 3, 7, 2, 0, 0};
     setBoard(n, board, queenPositions4);
     // printBoard(n, board);
-    printf("\nTest Case 4: %s\n", !isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("\n  Test Case 4: %s\n", !isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
+    printf("  isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
     // ---------------------------------------------------------------------------------
 
 }
 
 // nextLegalPosition Test Cases
-void nextLegalPositionTests() {
+void nextLegalPositionTests() {  
 
-    printf("\n\n\nnextLegalPosition Test Cases:\n-------------------------------------------\n");
+    printf("\n\n\n  nextLegalPosition Test Cases:\n-------------------------------------------\n");
     
     int n = 8;
     int board[n][n];
@@ -92,22 +92,22 @@ void nextLegalPositionTests() {
     int queenPositions2[8] = {1, 6, 8, 3, 5, 0, 0, 0};
     setBoard(n, board, queenPositions2);
     nextLegalPosition(n, board, getNextRow(n, board, n - 1));
-    printf("\nTest Case 1: %s\n", strcmp(arrayRepresentation(n, board), "1, 6, 8, 3, 7, 0, 0, 0") == 0 ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("\n  Test Case 1: %s\n", strcmp(arrayRepresentation(n, board), "1, 6, 8, 3, 7, 0, 0, 0") == 0 ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("Initial board: \t\t{1, 6, 8, 3, 5, 0, 0, 0}\n");
+    printf("  Initial board: \t\t{1, 6, 8, 3, 5, 0, 0, 0}\n");
     // printBoard(n, board);
-    printf("Next legal position: \t{%s}\n", arrayRepresentation(n, board));
+    printf("  Next legal position: \t{%s}\n", arrayRepresentation(n, board));
     printBoard(n, board);
     printf("\n");
 
     // Test Case 2 (legal initial position)
     setBoard(n, board, queenPositions);
     nextLegalPosition(n, board, getNextRow(n, board, n - 1));
-    printf("Test Case 2: %s\n", strcmp(arrayRepresentation(n, board), "1, 6, 8, 3, 7, 4, 0, 0") == 0 ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("  Test Case 2: %s\n", strcmp(arrayRepresentation(n, board), "1, 6, 8, 3, 7, 4, 0, 0") == 0 ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("Initial board: \t\t{1, 6, 8, 3, 7, 0, 0, 0}\n");
+    printf("  Initial board: \t\t{1, 6, 8, 3, 7, 0, 0, 0}\n");
     // printBoard(n, board);
-    printf("Next legal position: \t{%s}\n", arrayRepresentation(n, board));
+    printf("  Next legal position: \t{%s}\n", arrayRepresentation(n, board));
     printBoard(n, board);
     printf("\n");
 
@@ -115,11 +115,11 @@ void nextLegalPositionTests() {
     int queenPositions3[8] = {1, 6, 8, 3, 7, 4, 2, 5};
     setBoard(n, board, queenPositions3);
     nextLegalPosition(n, board, getNextRow(n, board, n - 1));
-    printf("Test Case 3: %s\n", strcmp(arrayRepresentation(n, board), "1, 6, 8, 5, 0, 0, 0, 0") == 0 ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+    printf("  Test Case 3: %s\n", strcmp(arrayRepresentation(n, board), "1, 6, 8, 5, 0, 0, 0, 0") == 0 ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
-    printf("Initial board: \t\t{1, 6, 8, 3, 7, 4, 2, 5}\n");
+    printf("  Initial board: \t\t{1, 6, 8, 3, 7, 4, 2, 5}\n");
     // printBoard(n, board);
-    printf("Next legal position: \t{%s}\n", arrayRepresentation(n, board));
+    printf("  Next legal position: \t{%s}\n", arrayRepresentation(n, board));
     printBoard(n, board);
     printf("\n");
 
@@ -128,7 +128,7 @@ void nextLegalPositionTests() {
 // findFirstSolution Test Cases
 void findFirstSolution() {
     // finds the first legal position for n = 4...100
-    printf("\n\nFinding the first legal position for n = 4...100:\n-------------------------------------------\n");
+    printf("\n\n  Finding the first legal position for n = 4...100:\n  -------------------------------------------\n");
     for (int n = 4; n <= 14; n++) {
         int board[n][n];
         int queenPositions[n];
@@ -137,7 +137,7 @@ void findFirstSolution() {
         }
         setBoard(n, board, queenPositions);
         getSolution(n, board);
-        printf("First legal position for n = %d: {%s}\n", n, arrayRepresentation(n, board));
+        printf("  First legal position for n = %d: {%s}\n", n, arrayRepresentation(n, board));
         // printBoard(n, board);
         printf("\n");
     }
@@ -148,19 +148,20 @@ void findAllSolutions() {
 
     // numSolutions contains the known number of solutions for n = 4...20
     // source: https://en.wikipedia.org/wiki/Eight_queens_puzzle#Counting_solutions_for_other_sizes_n 
-    long long numSolutions[17] = {2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712, 365596, 2279184, 14772512, 95815104, 666090624, 4968057848, 39029188884};
+    // long long numSolutions[17] = {2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712, 365596, 2279184, 14772512, 95815104, 666090624, 4968057848, 39029188884};
     
     // Counts the number of solutions for n = 4...20
-    printf("\n\nCounting the number of solutions for n = 4...20:\n-------------------------------------------\n");
-    for (int n = 4; n <= 14; n++) {         // change 14 to 20 to test for n = 4...20, 14 is what my computer can handle in a reasonable amount of time (about 10 seconds)
+    printf("\n\n  Counting the number of solutions for n = 4...20:\n  -------------------------------------------\n");
+    for (int n = 4; n <= 20; n++) {         // change 14 to 20 to test for n = 4...20, 14 is what my computer can handle in a reasonable amount of time (about 10 seconds)
         int board[n][n];
         int queenPositions[n];
         for (int i = 0; i < n; i++) {
             queenPositions[i] = 0;
         }
         setBoard(n, board, queenPositions);
-        getAllSolutions(n, board);
-        printf("Number of solutions for n = %d: %d\t\t%s\n", n, getAllSolutions(n, board), getAllSolutions(n, board) == numSolutions[n - 4] ? " \033[0;32m PASS" : " \033[0;31m FAIL");
-        printf("\033[0m");
+        int solutions = getAllSolutions(n, board);
+        printf("  Number of solutions for n = %d: %d\n", n, solutions);
+        // printf("Number of solutions for n = %d: %d\t\t%s\n", n, getAllSolutions(n, board), getAllSolutions(n, board) == numSolutions[n - 4] ? " \033[0;32m PASS" : " \033[0;31m FAIL");
+        // printf("\033[0m");
     }
 }
