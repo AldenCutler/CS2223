@@ -16,6 +16,18 @@ void printBoard(int n, int board[n][n]) {
     }
 }
 
+/*
+
+Idea for isLegalPosition:
+(1, 6, 8, 3, 5, 0, 0, 0) should return false. This is because the queen at (1, 1) threatens the queen at (5, 5).
+An elegant way to notice this is that 1 and 5 are both in the "correct" spot in the array. This means that they both must be
+on the center diagonal. Thus, the position must be illegal. 
+
+I think we may be able to generalize this for any diagonal. In the array above, the distance between the first element and the 5th element is 4.
+The difference between the value of the first element and the value of the 5th element is also 4. I believe this will hold for any diagonal, but I'm not sure.
+
+*/
+
 int isThreatened(int n, int board[n][n], int row, int col) {
     int i, j;
 

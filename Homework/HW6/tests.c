@@ -63,7 +63,7 @@ void isLegalPositionTests() {
     int queenPositions3[8] = {1, 6, 8, 3, 5, 0, 0, 0};
     setBoard(n, board, queenPositions3);
     // printBoard(n, board);
-    printf("\nTest Case 3: %s\n", !isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FA");
+    printf("\nTest Case 3: %s\n", !isLegalPosition(n, board) ? " \033[0;32m PASS" : " \033[0;31m FAIL");
     printf("\033[0m");
     printf("isLegalPosition: %s\n", isLegalPosition(n, board) ? "true" : "false");
 
@@ -137,7 +137,7 @@ void findFirstSolution() {
         }
         setBoard(n, board, queenPositions);
         getSolution(n, board);
-        printf("First legal position for n = %d: {%s}\n", n, arrayRepresentation(n, board));     // There seems to be an issue with arrayRepresentation(n, board) for n > 9, but the board is still printed correctly
+        printf("First legal position for n = %d: {%s}\n", n, arrayRepresentation(n, board));
         // printBoard(n, board);
         printf("\n");
     }
@@ -145,11 +145,14 @@ void findFirstSolution() {
 
 // findAllSolutions Test Cases
 void findAllSolutions() {
+
+    // numSolutions contains the known number of solutions for n = 4...20
+    // source: https://en.wikipedia.org/wiki/Eight_queens_puzzle#Counting_solutions_for_other_sizes_n 
     long long numSolutions[17] = {2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712, 365596, 2279184, 14772512, 95815104, 666090624, 4968057848, 39029188884};
     
     // Counts the number of solutions for n = 4...20
     printf("\n\nCounting the number of solutions for n = 4...20:\n-------------------------------------------\n");
-    for (int n = 4; n <= 14; n++) {
+    for (int n = 4; n <= 14; n++) {         // change 14 to 20 to test for n = 4...20, 14 is what my computer can handle in a reasonable amount of time (about 10 seconds)
         int board[n][n];
         int queenPositions[n];
         for (int i = 0; i < n; i++) {
